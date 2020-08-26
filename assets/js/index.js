@@ -258,3 +258,29 @@ const student1 = new Student("Porfiriy", "Ivanov", 2017);
 console.log(student1);
 console.log(student1.getFullName());
 console.log(student1.getCourse());
+
+// Решение преподавателя:
+// Не нужно создавать блок constructor и вызывать ненужный объект!
+// Добавляя static, можно сразу применять методы класса на строках без создания объекта.
+
+class MyString2 {
+  static reverse(string) {
+    return string.split("").reverse().join("");
+  }
+
+  static ucFirst(string) {
+    return string.slice(0, 1).toUpperCase() + string.slice(1);
+  }
+
+  static ucWords(string) {
+    return string
+      .split(" ")
+      .map((word) => word[0].toUpperCase() + word.slice(1))
+      .join(" ");
+  }
+}
+
+const str4 = "Hihkxvl zkdgaytsd swgfcx fkjk.";
+console.log(MyString2.reverse(str4));
+console.log(MyString2.ucFirst(str4));
+console.log(MyString2.ucWords(str4));
