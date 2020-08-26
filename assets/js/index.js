@@ -105,3 +105,156 @@ function getMaxSubitems(array) {
 }
 
 console.log(getMaxSubitems(arraySubarrays));
+
+// =====================================================================
+
+class SquirrelClass {
+  constructor(name, age) {
+    this._name = {
+      value: name,
+      motherName: "Sonya",
+      fatherName: "Pasha",
+    };
+    this._age = age;
+  }
+
+  set name(name) {
+    if (typeof name !== "string") {
+      throw new TypeError("Name must be a string");
+    }
+    if (name === "" || name.length > 128) {
+      throw new RangeError(
+        "Name must have minimum one symbol and maximum 128 symbols"
+      );
+    }
+    this._name.value = name;
+  }
+
+  get name() {
+    return this._name.value;
+  }
+
+  set age(age) {
+    if (typeof age !== "number") {
+      throw new TypeError("Age must be a number");
+    }
+    if (age <= 0 || age > 50) {
+      throw new RangeError("Age must be a positive value less than 50");
+    }
+    if (!Number.isInteger()) {
+      throw new RangeError("Age must be integer");
+    }
+
+    this._age = age;
+  }
+
+  get age() {
+    return this._age;
+  }
+
+  static isSquirrel(squirrel) {
+    return this instanceof SquirrelClass;
+  }
+
+  sayHi() {
+    return `Hi, my name is ${this.name}`;
+  }
+}
+
+const sq = new SquirrelClass("Tanya", 5);
+
+class FlyingSquirrel extends SquirrelClass {
+  constructor(name, age, isMale) {
+    super(name, age);
+    this.isMale = isMale;
+  }
+
+  fly() {
+    return `Squirrel with name ${this.name} is flying`;
+  }
+}
+
+const flyingSq = new FlyingSquirrel("Max", 5, true);
+
+class User {
+  constructor(name, age, isMale, isBanned = false) {
+    this._name = name;
+    this._age = age;
+    this._isMale = isMale;
+    this._isBanned = isBanned;
+  }
+
+  sayHi() {}
+  sendMessage(msg) {
+    return `user wrote ${msg}`;
+  }
+}
+
+class Admin extends User {
+  constructor(name, age, isMale, isBanned = false) {
+    super(name, age, isMale, isBanned);
+  }
+
+  sendMessage(msg) {
+    const parentResult = super.sendMessage(msg);
+    return `admin send ${msg}`;
+  }
+  banUser() {}
+}
+
+const user = new User("user", 19, true);
+const admin = new Admin("admin", 22, false);
+
+class MyString {
+  constructor(string) {
+    this.string = string;
+  }
+
+  reverse(string) {
+    return this.string.split("").reverse().join("");
+  }
+
+  ucFirst(string) {
+    return this.string.slice(0, 1).toUpperCase() + this.string.slice(1);
+  }
+
+  ucWords(string) {
+    return this.string
+      .split(" ")
+      .map((word) => word[0].toUpperCase() + word.slice(1))
+      .join(" ");
+  }
+}
+
+const str3 = new MyString("adghhjh llllll ttnjup lljggbn mnbvcx");
+console.log(str3);
+console.log(str3.reverse(str3));
+console.log(str3.ucFirst(str3));
+console.log(str3.ucWords(str3));
+
+class User2 {
+  constructor(name, surname, year) {
+    this.name = name;
+    this.surname = surname;
+    this.year = year;
+  }
+
+  getFullName() {
+    return `${this.name} ${this.surname}`;
+  }
+}
+class Student extends User2 {
+  constructor(name, surname, year) {
+    super(name, surname, year);
+  }
+
+  getCourse() {
+    let currentDate = new Date();
+    return currentDate.getFullYear() - this.year;
+  }
+}
+
+const student1 = new Student("Porfiriy", "Ivanov", 2017);
+console.log(student1);
+console.log(student1.getFullName());
+console.log(student1.getCourse());
